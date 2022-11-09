@@ -13,6 +13,8 @@ const HEIGHT = 6;
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
+const htmlBoard = document.getElementById("board");
+
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -35,11 +37,9 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-  const htmlBoard = document.getElementById("board")
 
   // creates top row element, and adds id attribute and eventlistener
-  const topRow = document.createElement("tr");
+  const topRow = document.createElement("thead");
   topRow.setAttribute("id", "column-top");
   topRow.addEventListener("click", handleClick);
 
@@ -96,17 +96,18 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  const x = +evt.target.id;
   console.log(x);
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  const y = findSpotForCol(x);
   if (y === null) {
     return;
   }
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
+  board[y][x] = currPlayer;
   placeInTable(y, x);
 
   // check for win
@@ -116,6 +117,14 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
+  /*
+  const cells = htmlBoard.querySelectorAll("tr td");
+  const cellsArray = Array.from(cells);
+
+  if (cellsArray.every(currentCell => currentCell.children.length === 1)) {
+    endGame("it's a tie!");
+  }
+  */
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
