@@ -59,7 +59,7 @@ function makeHtmlBoard() {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
-      cell.setAttribute("id", `c-${y}-${x}`);
+      cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
     }
 
