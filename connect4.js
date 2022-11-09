@@ -19,7 +19,8 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  // for loop iterating over the HEIGHT
+
+  // for loop iterating over the HEIGHT value
   // push WIDTH # of nulls into each subarray
 
   for (let i = 0; i < HEIGHT; i++) {
