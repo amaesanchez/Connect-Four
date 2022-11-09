@@ -71,7 +71,12 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 5
-  return 5;
+  for (let y = (HEIGHT - 1); y >= 0; y--)  {
+    if (!board[y][x]) {
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -117,14 +122,10 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-  /*
-  const cells = htmlBoard.querySelectorAll("tr td");
-  const cellsArray = Array.from(cells);
-
-  if (cellsArray.every(currentCell => currentCell.children.length === 1)) {
-    endGame("it's a tie!");
+  if (board.flat().every(currCell => !!currCell)) {
+    endGame("It's a tie!");
   }
-  */
+
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
