@@ -19,10 +19,12 @@
 
 .p1 {
   background-color: violet;
+  border-radius: 50%;
 }
 
 .p2 {
   background-color: chartreuse;
+  border-radius: 50%;
 }
 
 /* column-top is table row of clickable areas for each column */
