@@ -143,6 +143,23 @@ function checkForWin() {
   function _win(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
+    const cellValues = cells.map(cell => board[0][1]);
+    if (!(cellValues.every(currVal => currVal === currPlayer))) {
+      return false;
+    }
+
+    for (let coord of cells) {
+      let y = coord[0]
+      let x = coord[1]
+      if (!(y >= 0 && y < HEIGHT)) {
+        return false;
+      }
+
+      if (!(x >= 0 && x < WIDTH)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
