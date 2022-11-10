@@ -134,12 +134,12 @@ function handleClick(evt) {
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 function checkForWin() {
-  /** _win:
+  /** _checkWinningPattern:
    * takes input array of 4 cell coordinates [ [y, x], [y, x], [y, x], [y, x] ]
    * returns true if all are legal coordinates for a cell & all cells match
    * currPlayer
    */
-  function _win(cells) {
+  function _checkWinningPattern(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
 
@@ -168,8 +168,8 @@ function checkForWin() {
   // using HEIGHT and WIDTH, generate "check list" of coordinates
   // for 4 cells (starting here) for each of the different
   // ways to win: horizontal, vertical, diagonalDR, diagonalDL
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
+  for (let y = 0; y < HEIGHT; y++) {
+    for (let x = 0; x < WIDTH; x++) {
       // TODO: assign values to the below variables for each of the ways to win
       // horizontal has been assigned for you
       // each should be an array of 4 cell coordinates:
@@ -201,7 +201,9 @@ function checkForWin() {
       ];
 
       // find winner (only checking each win-possibility as needed)
-      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+      if (_checkWinningPattern(horiz) || _checkWinningPattern(vert) || 
+        _checkWinningPattern(diagDR) || _checkWinningPattern(diagDL)
+      ) {
         return true;
       }
     }
