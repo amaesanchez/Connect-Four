@@ -94,7 +94,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -102,7 +102,6 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   const x = +evt.target.id;
-  console.log(x);
 
   // get next spot in column (if none, ignore click)
   const y = findSpotForCol(x);
@@ -143,14 +142,11 @@ function checkForWin() {
   function _win(cells) {
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
-    const cellValues = cells.map(cell => board[0][1]);
-    if (!(cellValues.every(currVal => currVal === currPlayer))) {
-      return false;
-    }
 
     for (let coord of cells) {
       let y = coord[0]
       let x = coord[1]
+
       if (!(y >= 0 && y < HEIGHT)) {
         return false;
       }
@@ -159,6 +155,13 @@ function checkForWin() {
         return false;
       }
     }
+
+    const cellValues = cells.map(cell => board[cell[0]][cell[1]]);
+
+    if (!(cellValues.every(currVal => currVal === currPlayer))) {
+      return false;
+    }
+
     return true;
   }
 
@@ -178,9 +181,24 @@ function checkForWin() {
         [y, x + 2],
         [y, x + 3],
       ];
-      let vert;
-      let diagDL;
-      let diagDR;
+      let vert = [
+        [y, x],
+        [y + 1, x],
+        [y + 2, x],
+        [y + 3, x],
+      ];
+      let diagDL = [
+        [y, x],
+        [y + 1, x - 1],
+        [y + 2, x - 2],
+        [y + 3, x - 3],
+      ];
+      let diagDR = [
+        [y, x],
+        [y + 1, x + 1],
+        [y + 2, x + 2],
+        [y + 3, x + 3],
+      ];
 
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
